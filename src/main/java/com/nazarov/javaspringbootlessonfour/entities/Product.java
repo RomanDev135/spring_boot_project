@@ -11,11 +11,11 @@ public class Product {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "title")
+    private String title;
+
     @Column(name = "description")
     private String description;
-
-    @Column(name = "name")
-    private String name;
 
     @Column(name = "price")
     private BigDecimal price;
@@ -23,10 +23,10 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String name, String description, BigDecimal price) {
+    public Product(Long id, String title, String description, BigDecimal price) {
         this.id = id;
+        this.title = title;
         this.description = description;
-        this.name = name;
         this.price = price;
     }
 
@@ -46,12 +46,12 @@ public class Product {
         this.description = description;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public BigDecimal getPrice() {
@@ -66,8 +66,8 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
+                ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", name='" + name + '\'' +
                 ", price=" + price +
                 '}';
     }

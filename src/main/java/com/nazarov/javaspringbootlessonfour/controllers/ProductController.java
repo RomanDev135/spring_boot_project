@@ -3,10 +3,16 @@ package com.nazarov.javaspringbootlessonfour.controllers;
 
 import com.nazarov.javaspringbootlessonfour.entities.Product;
 import com.nazarov.javaspringbootlessonfour.services.ProductService;
+import com.nazarov.javaspringbootlessonfour.services.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.math.BigDecimal;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/product")
@@ -16,15 +22,19 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public String indexPage(Model model) {
-        model.addAttribute("products", productService.getAllProduct());
+    public String indexPage(Model model, @RequestParam(name = "titleFilter", required = false) Optional<String> titleFilter,
+                            @RequestParam(name = "min", required = false) Optional<BigDecimal> min,
+                            @RequestParam(name = "max", required = false) Optional<BigDecimal> max,
+                            @RequestParam(name = "page", required = false) Optional<Integer> page,
+                            @RequestParam(name = "size", required = false) Optional<Integer> size) {
+        model.addAttribute("products", productService.getByParams(titleFilter, min, max, page, size));
         return "product_view/index";
     }
 
 
     @GetMapping({"/{id}"})
     public String editProduct(@PathVariable(value = "id") Long id, Model model) {
-        model.addAttribute("product", productService.getById(id));
+        model.addAttribute("product", productService.getById(id).orElseThrow(NotFoundException::new));
         return "product_view/product_form";
     }
 
@@ -44,6 +54,14 @@ public class ProductController {
     public String removeProduct(@PathVariable(value = "id") Long id) {
         productService.remove(id);
         return "redirect:/product";
+    }
+
+    @ExceptionHandler
+    public ModelAndView notFoundExceptionHandler(NotFoundException exception) {
+        ModelAndView modelAndView = new ModelAndView("product_view/not_found");
+        modelAndView.setStatus(HttpStatus.NOT_FOUND);
+        return modelAndView;
+
     }
 
 }
