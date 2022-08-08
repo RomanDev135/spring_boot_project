@@ -34,13 +34,13 @@ public class UserRestController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public User createUser(User user) {
+    public User createUser(@RequestBody User user) {
         userService.createOrUpdate(user);
         return user;
     }
 
     @PutMapping(consumes = "application/json", produces = "application/json")
-    public User updateUser(User user) {
+    public User updateUser(@RequestBody User user) {
         userService.createOrUpdate(user);
         return user;
     }
