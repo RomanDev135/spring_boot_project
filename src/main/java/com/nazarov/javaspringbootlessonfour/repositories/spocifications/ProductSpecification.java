@@ -21,4 +21,6 @@ public class ProductSpecification {
         return (root, query, builder) -> builder.lessThanOrEqualTo(root.get("price"), max);
 
     }
+
+
 }

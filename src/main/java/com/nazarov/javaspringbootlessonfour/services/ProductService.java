@@ -7,6 +7,7 @@ import com.nazarov.javaspringbootlessonfour.repositories.spocifications.ProductS
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +48,9 @@ public class ProductService {
                                      Optional<BigDecimal> min,
                                      Optional<BigDecimal> max,
                                      Optional<Integer> page,
-                                     Optional<Integer> size) {
+                                     Optional<Integer> size,
+                                     Optional<String> sortField,
+                                     Optional<String> sortOrder) {
         //1 способ
 //        if (!nameFilter.contains("%")) {
 //            nameFilter = String.join("", "%", nameFilter, "%");
@@ -66,6 +69,11 @@ public class ProductService {
 
         if (max.isPresent()) {
             specification = specification.and(ProductSpecification.lessOrEquals(max.get()));
+        }
+
+        if (sortField.isPresent() && sortOrder.isPresent()) {
+            productDAO.findAll(specification, PageRequest.of(page.orElse(1) - 1, size.orElse(4),
+                    Sort.by(Sort.Direction.fromString(sortOrder.get()), sortField.get())));
         }
 
         return productDAO.findAll(specification, PageRequest.of(page.orElse(1) - 1, size.orElse(4)));
