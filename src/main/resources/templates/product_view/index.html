@@ -71,7 +71,7 @@
 
                     </i>
                     <i th:if="${param.sortField != null && param.sortOrder != null && param.sortField[0] == column }"
-                       class="'fa fa-sort-' + ${param.sortField[0] == column && param.sortOrder[0] == 'ASC ? 'down' : 'up'}">
+                       class="'fa fa-sort-' + ${param.sortField[0] == column && param.sortOrder[0] == 'ASC' ? 'down' : 'up'}">
                     </i>
                 </a></th>
                 <th scope="col">Description <a th:href="@{/products(
@@ -89,7 +89,7 @@
 
                     </i>
                     <i th:if="${param.sortField != null && param.sortOrder != null && param.sortField[0] == column }"
-                       class="'fa fa-sort-' + ${param.sortField[0] == column && param.sortOrder[0] == 'ASC ? 'down' : 'up'}">
+                       class="'fa fa-sort-' + ${param.sortField[0] == column && param.sortOrder[0] == 'ASC' ? 'down' : 'up'}">
                     </i>
                 </a></th>
                 <th scope="col">Price <a th:href="@{/products(
@@ -107,7 +107,7 @@
 
                     </i>
                     <i th:if="${param.sortField != null && param.sortOrder != null && param.sortField[0] == column }"
-                       class="'fa fa-sort-' + ${param.sortField[0] == column && param.sortOrder[0] == 'ASC ? 'down' : 'up'}">
+                       class="'fa fa-sort-' + ${param.sortField[0] == column && param.sortOrder[0] == 'ASC' ? 'down' : 'up'}">
                     </i>
                 </a></th>
                 <th scope="col">Actions</th>

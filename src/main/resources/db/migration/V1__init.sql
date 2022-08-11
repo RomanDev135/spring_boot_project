@@ -11,10 +11,10 @@ create table products
 
 
 insert into products(title, description, price)
-values ('MacBook', 'Ultra low and Great Power', 3000),
-       ('iPhone', 'The most expensive phone by credit', 1000),
-       ('iPad', 'More size - more cost', 1500),
-       ('iMac', 'More size - more cost', 4000);
+values ('MacBook', 'Retina display. 13.3" LED backlit display with IPS technology', 100000),
+       ('iPhone', 'Incredibly durable Ceramic Shield front panel.', 50000),
+       ('iPad', ' 2D lighting system', 30000),
+       ('iMac', ' Convenient and functional mono-block computer', 80000);
 
 -- тестовая таблица
 

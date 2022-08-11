@@ -76,7 +76,7 @@ public class ProductService {
                     Sort.by(Sort.Direction.fromString(sortOrder.get()), sortField.get())));
         }
 
-        return productDAO.findAll(specification, PageRequest.of(page.orElse(1) - 1, size.orElse(4)));
+        return productDAO.findAll(specification, PageRequest.of(page.orElse(1) - 1, size.orElse(6)));
 
 
     }
